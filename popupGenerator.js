@@ -4,6 +4,7 @@ function generatePopupContent(feature) {
     var eventName = feature.properties.event_name;
     var eventDate = feature.properties.date;
     var eventLink = feature.properties.event_link;
+    var eventPhoto = 'header_square.jpg';
 
     // Define the dynamic parts based on feature properties
     var eventTheme = feature.properties.public_y_n;
@@ -18,6 +19,10 @@ function generatePopupContent(feature) {
         extraContent = `<div class="extra-content">Different info for Type 3</div>`;
     }
 
+    if (feature.properties.event_photo != ''){
+        eventPhoto = feature.properties.event_photo
+    }
+
     // Build the popup content using a template literal
     return `
         <div class="wrapper">
@@ -27,10 +32,10 @@ function generatePopupContent(feature) {
                 </div>
             </div>
             <div class="photo">
-                <img src='header_square.jpg'>
+                <img src=${eventPhoto}>
             </div>
             <div class="table-layout">
-                <table>
+                <table class="popup-tbl">
                     <tr>
                         <th>Event Date:</th>
                         <td>${eventDate}</td>

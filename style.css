@@ -68,8 +68,15 @@ html, body, #map {
     width: 100%;
     margin: 10px;
   }
-  
+
   table {
+    font-family: "Raleway";
+    font-size: 12px;
+    border: dashed #4f4f59 1px;
+    width: 100%;
+  }
+
+  .popup-tbl {
     font-family: "Raleway";
     font-size: 12px;
     border: dashed #4f4f59 1px;
@@ -91,8 +98,8 @@ html, body, #map {
   
   .photo {
     display: flex;
-    width: 200px;
-    height: 200px;
+    width: 80%;
+    height: 80%;
     align-items: center;
     justify-content: center;
     margin-top: 10px;
@@ -171,3 +178,7 @@ html, body, #map {
   z-index: 999; 
 }
  */
+
+ .leaflet-popup-content {
+  width: 25%;
+ }
