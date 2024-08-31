@@ -110,6 +110,11 @@ html, body, #map {
     height: 100%;
   }
 
+  /* img .legendIcon {
+    width: 1 px;
+    height: 1 px;
+  } */
+
   .footer {
     margin-top: auto;
     align-items: center;

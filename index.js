@@ -12,12 +12,21 @@ var OpenStreetMap_HOT = L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{
 });
 
 // Stamen Watercolor Basemap
-var Stamen_Watercolor = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.{ext}', {
-	attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-	subdomains: 'abcd',
+var Stadia_StamenWatercolor = L.tileLayer('https://tiles.stadiamaps.com/tiles/stamen_watercolor/{z}/{x}/{y}.{ext}', {
 	minZoom: 1,
 	maxZoom: 16,
+	attribution: '&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://www.stamen.com/" target="_blank">Stamen Design</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 	ext: 'jpg'
+});
+
+// ESRI Street Map
+var Esri_WorldStreetMap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
+	attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012'
+});
+
+// ESRI World Imagery
+var Esri_WorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+	attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
 });
 
 var markerClusterOptions = {
@@ -48,7 +57,9 @@ var map = L.map('map', {
 
 // Default Base Map
 // Stadia_AlidadeSatellite.addTo(map);
-OpenStreetMap_HOT.addTo(map);
+Esri_WorldImagery.addTo(map);
+// Esri_WorldStreetMap.addTo(map);
+// OpenStreetMap_HOT.addTo(map);
 
 
 var MarkerIcon = L.Icon.extend({
@@ -61,7 +72,7 @@ var MarkerIcon = L.Icon.extend({
 
 var GGIcon = new MarkerIcon({iconUrl: 'GG-icon.png'});
 
-var virtualIcon = new MarkerIcon({iconUrl: 'GG-icon.png', className: 'shadow'});
+var virtualIcon = new MarkerIcon({iconUrl: 'GG-virtual-icon.png'});
 
 var customLayer = L.geoJson(null, {
     pointToLayer: function(feature, latlng){
@@ -84,9 +95,6 @@ var customLayer = L.geoJson(null, {
     var popupContent = generatePopupContent(layer.feature)
 
   function openPopupAndCenterMap(layer) {
-
-    // Get the target LatLng for the popup
-    var targetLatLng = layer.getLatLng();
   
     // Open the popup after the map has panned
     setTimeout(function () {
@@ -115,25 +123,31 @@ var customLayer = L.geoJson(null, {
     layerSupport.checkIn(allEvents);
     layerSupport.checkIn(eventsVirtual)
 
-      map.addLayer(allEvents);
+    map.addLayer(allEvents);
   }
 });
 
 var runLayer = omnivore.csv('./responses.csv', null, customLayer)
-  .on('ready', function() {
+  .on('ready', function(layer) {
+
+    map.fitBounds(layer.target.getBounds().pad(0.2));
 
     var baseMaps = {
       // "Default (Stadia Alidade Satellite)": Stadia_AlidadeSatellite,
+      "ESRI World Imagery": Esri_WorldImagery,
+      "ESRI World Street Map": Esri_WorldStreetMap,
       "OpenStreetMap HOT": OpenStreetMap_HOT,
-      "Stamen Watercolor": Stamen_Watercolor
+      "Stamen Watercolor": Stadia_StamenWatercolor
     };
 
-    hybridCircle = "<svg class='shadow' width='10' height='10'> <circle cx='5' cy='5' r='4' stroke-width='0.5' stroke='darkgrey' fill='white'/></svg>";
+    // hybridCircle = "<svg class='shadow' width='10' height='10'> <circle cx='5' cy='5' r='4' stroke-width='0.5' stroke='darkgrey' fill='white'/></svg>";
 
+    var hybridIcon = `<img class = 'legendIcon' src='GG-virtual-icon.png'>`
+    
     var groupedOverlays = {
       "Events": {
         "All Events": allEvents,
-        [hybridCircle + "Virtual Option"]: eventsVirtual
+        "Virtual Option": eventsVirtual  // [hybridIcon + "Virtual Option"]: eventsVirtual
       }
     }
 
@@ -142,8 +156,6 @@ var runLayer = omnivore.csv('./responses.csv', null, customLayer)
     };
 
     L.control.groupedLayers(baseMaps, groupedOverlays, options).addTo(map);
-  
-
     
     //Find the input element for the "All Events" overlay and set its checked property to true
     var inputs = document.getElementsByClassName('leaflet-control-layers-overlays')[0].getElementsByTagName('input');
