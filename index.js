@@ -11,14 +11,6 @@ var OpenStreetMap_HOT = L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{
 	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Tiles style by <a href="https://www.hotosm.org/" target="_blank">Humanitarian OpenStreetMap Team</a> hosted by <a href="https://openstreetmap.fr/" target="_blank">OpenStreetMap France</a>'
 });
 
-// Stamen Watercolor Basemap
-var Stadia_StamenWatercolor = L.tileLayer('https://tiles.stadiamaps.com/tiles/stamen_watercolor/{z}/{x}/{y}.{ext}', {
-	minZoom: 1,
-	maxZoom: 16,
-	attribution: '&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://www.stamen.com/" target="_blank">Stamen Design</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-	ext: 'jpg'
-});
-
 // ESRI Street Map
 var Esri_WorldStreetMap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
 	attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012'
@@ -136,8 +128,7 @@ var runLayer = omnivore.csv('./responses.csv', null, customLayer)
       // "Default (Stadia Alidade Satellite)": Stadia_AlidadeSatellite,
       "ESRI World Imagery": Esri_WorldImagery,
       "ESRI World Street Map": Esri_WorldStreetMap,
-      "OpenStreetMap HOT": OpenStreetMap_HOT,
-      "Stamen Watercolor": Stadia_StamenWatercolor
+      "OpenStreetMap HOT": OpenStreetMap_HOT
     };
 
     // hybridCircle = "<svg class='shadow' width='10' height='10'> <circle cx='5' cy='5' r='4' stroke-width='0.5' stroke='darkgrey' fill='white'/></svg>";

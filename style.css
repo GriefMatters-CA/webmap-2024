@@ -27,18 +27,6 @@ html, body, #map {
     margin-bottom: auto;
     display: flex;
   }
-  
-  .virtual {
-    flex: 1;
-    width: 20%;
-    font-size: 10pt;
-    background-color: red;
-    padding: 4px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 4px;
-  }
 
 .eventName {
   display: flex;
@@ -51,11 +39,13 @@ html, body, #map {
     color: #e9eae3;
     font-family: 'Roboto Slab';
     text-align: center;
-    font-size: 18pt;
+    font-size: 14pt;
     width: 100%;
     padding: 8px;
     border-radius: 4px;
     display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .eventTheme {
@@ -115,10 +105,30 @@ html, body, #map {
     height: 1 px;
   } */
 
-  .footer {
-    margin-top: auto;
+  .left-side {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+  }
+
+  .right-side {
+    flex: 2;
+    display: flex;
     align-items: center;
     justify-content: center;
+  }
+
+  .hybrid {
+    background-color: #bdd87b;
+    display: flex;
+    /* box-sizing:border-box;
+    max-width: 25%; */
+    font-size: 8pt;
+    margin: 4px;
+    font-family: "Raleway";
+    color: #4f4f59;
+    border-radius: 6px;
+    padding: 2px;
   }
   
   .learnMoreBtn, .buyTicketsBtn {
@@ -126,17 +136,14 @@ html, body, #map {
     border-radius: 6px;
     color: #4f4f59;
     margin: 4px;
+    font-size: 8pt;
     margin-bottom: 8px;
+    font-family: "Raleway";
   }
   
   .learnMoreBtn {
     background-color: #e9eae3;
     color: #4f4f59;
-    /* padding: 12px 24px; */
-    /* text-align: center; */
-    /* text-decoration: none; */
-    /* display: inline-block; */
-    /* font-size: 14px; */
   }
   
   .buyTicketsBtn {
@@ -154,7 +161,6 @@ html, body, #map {
       drop-shadow( 0px 0px 5px rgb(0, 255, 255, 0.5))
       drop-shadow( 0px 0px 5px rgb(0, 255, 255,  0.5))
       drop-shadow(0px 0px 10px rgb(255,255,255))
-      /* drop-shadow(0px 0px 15px rgb(102, 255, 0)); */
   }
 
   /* .hidden {
@@ -187,3 +193,4 @@ html, body, #map {
  .leaflet-popup-content {
   width: 25%;
  }
+

@@ -7,16 +7,21 @@ function generatePopupContent(feature) {
     var eventPhoto = 'header_square.jpg';
 
     // Define the dynamic parts based on feature properties
-    var eventTheme = feature.properties.public_y_n;
-    var extraContent = '';
+    var footer = ''
 
-    if (feature.properties.type === 'Type1') {
-        eventTheme = 'Special Theme 1';  // Example of overriding the theme
-        extraContent = `<div class="extra-content">Exclusive content for Type 1</div>`;
-    } else if (feature.properties.type === 'Type2') {
-        extraContent = `<div class="extra-content">Additional info for Type 2</div>`;
-    } else if (feature.properties.type === 'Type3') {
-        extraContent = `<div class="extra-content">Different info for Type 3</div>`;
+    if (feature.properties.inperson_n_h === 'Both in-person and virtual') {
+        footer = `<div class = "left-side"><div class="hybrid">Virtual Option Available</div></div><div class="right-side"><form action="${eventLink}" target="_blank">
+                    <button class="learnMoreBtn">
+                        Learn More...
+                    </button>
+                </form></div>`;
+    } 
+    else {
+        footer = `<form action="${eventLink}" target="_blank">
+                    <button class="learnMoreBtn">
+                        Learn More...
+                    </button>
+                </form>`
     }
 
     if (feature.properties.event_photo != ''){
@@ -46,13 +51,8 @@ function generatePopupContent(feature) {
                     </tr>
                 </table>
             </div>
-            ${extraContent} <!-- Insert dynamic content here -->
             <div class="footer">
-                <form action="${eventLink}" target="_blank">
-                    <button class="learnMoreBtn">
-                        Learn More...
-                    </button>
-                </form>
+                ${footer}
             </div>
         </div>
     `;
