@@ -57,6 +57,7 @@ html, body, #map {
   .table-layout {
     width: 100%;
     margin: 10px;
+    max-width: 50px;
   }
 
   table {
@@ -194,3 +195,12 @@ html, body, #map {
   width: 25%;
  }
 
+ .rotated {
+  transform: rotate(-90deg) translateX(-100%);
+  transform-origin: 0 0;
+  display: inline-block;
+  max-width: 100vh;
+  margin-top: 200%;
+  font-family: 'Brittany Signature';
+  font-size: 10pt;
+ }
