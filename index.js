@@ -158,6 +158,33 @@ var runLayer = omnivore.csv('./responses.csv', null, customLayer)
       }
     }
 
+    `<div class="splashscreen"> NEW TEXT</div>`
+
+    // var TestPopup = L.popup({
+    //   closeButton: true,
+    //   autoClose: true
+    //   })
+    //   .setLatLng(layer.target.getBounds().getCenter())
+    //   .setContent('<p>Some Disclaimer Text.</p>')
+    //   .openOn(map);
+
+    L.Control.textbox = L.Control.extend({
+      onAdd: function(map) {
+        
+      var text = L.DomUtil.create('div');
+      text.id = "splashscreen";
+      text.innerHTML = "<strong>Use the sidebar at left to view virtual events</strong>"
+      return text;
+      },
+  
+      onRemove: function(map) {
+        // Nothing to do here
+      }
+    });
+    L.control.textbox = function(opts) { return new L.Control.textbox(opts);}
+    L.control.textbox({ position: 'bottomright'}).addTo(map);
+
+
 })
   .addTo(map);
 
